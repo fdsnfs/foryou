@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+@media (max-width: 600px) {
+    h1 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .bouquet {
+        font-size: 28px;
+    }
+}
+
+.gallery img {
+    width: 90%;
+    max-width: 250px;
+}
+
+/* 🌹 Bouquet */
+.bouquet {
+    font-size: 40px;
+    margin-top: 30px;
+    animation: grow 1.5s ease forwards;
+    text-align: center;
+    filter: drop-shadow(0 0 10px rgba(255,0,80,0.6));
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) translateX(100px) rotate(360deg);
+        opacity: 0.8;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #ff9ecf);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 2s ease;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 60px;
+    color: white;
+    margin: 0;
+}
+
+p {
+    color: white;
+    font-size: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.start-btn {
+    background: white;
+    color: #ff4da6;
+}
+
+.section {
+    padding: 100px 20px;
+    color: white;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+input {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    margin: 5px;
+}
+
+.love-btn, .yes {
+    background: white;
+    color: #ff4da6;
+}
+
+.no {
+    background: #ff4da6;
+    color: white;
+    position: absolute;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Gallery */
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery img {
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0.9;
+}
+
+.gallery img:hover {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+    <source src="your-music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="hero">
+    <h1>For The Most Beautiful Girl ❤️</h1>
+    <p>I made this just for you...</p>
+    <button class="start-btn" onclick="startExperience()">Open My Heart 💌</button>
+</div>
+
+<div id="content" class="hidden">
+
+    <div class="section">
+        <h1>Benti ✨</h1>
+        <div class="gallery">
+            <img src="photo1.jpg">
+            <img src="photo2.jpg">
+            <img src="photo3.jpg">
+        </div>
+    </div>
+
+    <div class="section">
+        <h1>Love Calculator 💖</h1>
+        <input type="text" id="name1" placeholder="Your Name">
+        <input type="text" id="name2" placeholder="Her Name">
+        <br>
+        <button class="love-btn" onclick="calculateLove()">Check Compatibility</button>
+        <p id="result"></p>
+    </div>
+
+    <div class="section">
+        <h1>A Little Message 💌</h1>
+        <p>
+            If love was a project,<br>
+            you’d be my favorite commit.<br><br>
+            You make my world brighter every day. ❤️
+        </p>
+    </div>
+
+    <div class="section" style="position:relative; height:300px;">
+        <h1>Will You Be My Valentine? 💘</h1>
+        <button class="yes" onclick="showBouquet()">Yes 💕</button>
+        <div id="bouquet" class="bouquet hidden">
+    🌹🌹🌹
+    <br>
+    🌹🌹🌹🌹🌹
+    <br>
+    🌹🌹🌹🌹🌹🌹🌹
+</div>
+
+        <button class="no" id="noBtn">No 🙈</button>
+    </div>
+
+</div>
+
+<script>
+function showBouquet() {
+    const bouquet = document.getElementById("bouquet");
+    bouquet.classList.remove("hidden");
+
+    // Optional: small celebration alert
+    setTimeout(() => {
+        alert("You just made me the happiest person alive ❤️");
+    }, 800);
+}
+
+
+function startExperience() {
+    document.querySelector(".hero").style.display = "none";
+    document.getElementById("content").classList.remove("hidden");
+    document.getElementById("bgMusic").play();
+
+    revealSections();
+}
+
+function calculateLove() {
+    document.getElementById("result").innerHTML =
+        "Compatibility: 101% 💖<br>You are my favorite person.";
+}
+
+// Smooth reveal on scroll
+function revealSections() {
+    const sections = document.querySelectorAll(".section");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+}
+
+// No button runs away
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    const section = noBtn.parentElement;
+    const maxX = section.clientWidth - noBtn.offsetWidth;
+    const maxY = section.clientHeight - noBtn.offsetHeight;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+});
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 800);
+</script>
+
+</body>
+</html>
